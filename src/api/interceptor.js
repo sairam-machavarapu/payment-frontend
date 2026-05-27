@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-// Configure dynamic API base URL for Vercel deployment
-if (import.meta.env.VITE_API_URL) {
-  axios.defaults.baseURL = import.meta.env.VITE_API_URL;
-}
+const API_URL = import.meta.env.VITE_API_URL || 'https://payment-backend-yhud.onrender.com';
+axios.defaults.baseURL = API_URL;
 
 /**
  * Dynamically resolves the database name from:

@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { getDbName } from './interceptor';
 
+const API_URL = import.meta.env.VITE_API_URL || 'https://payment-backend-yhud.onrender.com';
+
 const client = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : '/api',
+  baseURL: `${API_URL}/api`,
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -28,13 +30,11 @@ export const saveRule = (dbName, description, category) =>
   client.post(`/rules/${getDb(dbName)}`, { description, category }).then((r) => r.data);
 
 export const exportExcel = (dbName) => {
-  const baseUrl = import.meta.env.VITE_API_URL || '';
-  window.open(`${baseUrl}/api/export/excel/${getDb(dbName)}`, '_blank');
+  window.open(`${API_URL}/api/export/excel/${getDb(dbName)}`, '_blank');
 };
 
 export const exportPdf = (dbName) => {
-  const baseUrl = import.meta.env.VITE_API_URL || '';
-  window.open(`${baseUrl}/api/export/pdf/${getDb(dbName)}`, '_blank');
+  window.open(`${API_URL}/api/export/pdf/${getDb(dbName)}`, '_blank');
 };
 
 export default client;
